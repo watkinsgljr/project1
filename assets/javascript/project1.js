@@ -15,9 +15,6 @@ $(document).ready(function () {
 
 
 
-
-
-
 function apiTM(eventSearch) {
     console.log(eventSearch)
     const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY"
@@ -28,7 +25,7 @@ function apiTM(eventSearch) {
         url: query,
         method: "GET"
     }).then(function (response) {
-        for (i = 0; i < 10; i++) {
+        for (i = 1; i < 10; i++) {
             console.log("success")
             console.log(response[i])
             $("$results").text(response)
