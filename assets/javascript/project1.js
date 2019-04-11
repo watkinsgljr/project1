@@ -28,7 +28,8 @@ function apiTM(eventSearch) {
         url: query,
         method: "GET"
     }).then(function (response) {
-        for (i=10; i < 10; i++) {
+        for (i = 0; i < 10; i++) {
+            console.log("success")
             console.log(response[i])
             $("$results").text(response)
         }
