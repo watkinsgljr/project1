@@ -5,6 +5,7 @@ $(document).ready(function () {
         apiEvents(search);
         // apiClass(search);
     });
+    // console.log(result.name)
 
 
 
@@ -27,11 +28,12 @@ $(document).ready(function () {
                     name : response._embedded.events[i].name,
                     date : response._embedded.events[i].dates.start.localDate,
                     time : response._embedded.events[i].dates.start.localTime,
-                    image: response._embedded.events[i].images[8].url
+                    image: response._embedded.events[i].images[8].url,
+                    venue: response._embedded.events[i]._embedded.venues[0].name
                 
                 }
-                console.log(result.name, result.date, result.time)
-                $("#results").append(result.name + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
+                // console.log(result.name, result.date, result.time)
+                $("#results").append(result.name + " " + result.venue + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
             }
         });
     };
