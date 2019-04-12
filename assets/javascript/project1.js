@@ -30,7 +30,7 @@ $(document).ready(function () {
         const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
         const apiTM = "https://app.ticketmaster.com/discovery/v2/"
         let keyword = "keyword=Aerosmith"
-        let query = apiTM + "events.json?" + apiKey + keyword
+        let query = apiTM + "events.json?" + apiKey
         console.log(query);
         $.ajax({
             url: query,
@@ -39,7 +39,7 @@ $(document).ready(function () {
             for (i = 0; i < 10; i++) {
                 console.log("eventSearch")
                 console.log(response._embedded.events[i])
-                $("$results").text(response)
+                // $("$results").text(response)
             }
         });
     };
