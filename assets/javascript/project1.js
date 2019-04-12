@@ -38,8 +38,8 @@ $(document).ready(function () {
         }).then(function (response) {
             for (i = 0; i < 10; i++) {
                 console.log("eventSearch")
-                console.log(response._embedded.events[i])
-                // $("$results").text(response)
+                console.log(response._embedded.events[i].classifications[0].genre.name)
+                $("#results").text(response._embedded.events[i].classifications)
             }
         });
     };
