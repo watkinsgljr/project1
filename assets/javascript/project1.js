@@ -7,7 +7,7 @@ $(document).ready(function () {
     });
 
 
-    var apiOptions = {
+    var userInfo = {
         firstName: $("#firstName").val(),
         lastName: $("#lastName").val(),
         zip: $("#zipCode").val()
@@ -15,7 +15,9 @@ $(document).ready(function () {
 
     var queryOptions = {
         zip: $("#zipCode").val(),
-        startDate: $("#startDate").val()
+        startDate: $("#startDate").val(),
+        event: $("#eventType").val(),
+        class: $("#classType").val(),
     }
 
 
