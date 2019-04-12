@@ -39,7 +39,8 @@ $(document).ready(function () {
             for (i = 0; i < 10; i++) {
                 console.log("eventSearch")
                 console.log(response._embedded.events[i].classifications[0].genre.name)
-                $("#results").text(response._embedded.events[i].classifications)
+                console.log(response._embedded.events[i])
+                $("#results").append(response._embedded.events[i].name + " " + response._embedded.events[i].dates.start.localDate + " " + response._embedded.events[i].dates.start.localTime + "</br>")
             }
         });
     };
