@@ -1,42 +1,73 @@
-
-
 $(document).ready(function () {
 
-    $(document).on("click", "#searchButton", function(){
+    $(document).on("click", "#searchButton", function () {
         var search = $("#searchField").val()
-        apiTM(search);
+        apiEvents(search);
+        // apiClass(search);
     });
 
 
+    var apiOptions = {
+        firstName: $("#firstName").val(),
+        lastName: $("#lastName").val(),
+        zip: $("#zipCode").val()
+    }
+
+    var queryOptions = {
+        zip: $("#zipCode").val(),
+        startDate: $("#startDate").val()
+    }
 
 
 
 
 
 
-
-function apiTM(eventSearch) {
-    console.log(eventSearch)
-    const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY"
-    const apiTM = "https://app.ticketmaster.com/discovery/v2/"
-    let query = apiTM + "attractions.json?" + apiKey
-    console.log(query);
-    $.ajax({
-        url: query,
-        method: "GET"
-    }).then(function (response) {
-        for (i = 0; i < 10; i++) {
-            console.log("success")
-            console.log(response[i])
-            $("$results").text(response)
-        }
-    })
-};
-
-
+    function apiEvents(eventSearch) {
+        console.log(eventSearch)
+        const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
+        const apiTM = "https://app.ticketmaster.com/discovery/v2/"
+        let keyword = "keyword=Aerosmith"
+        let query = apiTM + "events.json?" + apiKey + keyword
+        console.log(query);
+        $.ajax({
+            url: query,
+            method: "GET"
+        }).then(function (response) {
+            for (i = 0; i < 10; i++) {
+                console.log("eventSearch")
+                console.log(response._embedded.events[i])
+                $("$results").text(response)
+            }
+        });
+    };
 
 
+    function apiClass(classSearch) {
+        console.log(classSearch)
+        const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY"
+        const apiTM = "https://app.ticketmaster.com/discovery/v2/"
+        let query = apiTM + "classifications.json?" + apiKey
+        console.log(query);
+        $.ajax({
+            url: query,
+            method: "GET"
+        }).then(function (response) {
+            for (i = 0; i < 10; i++) {
+                console.log("classSearch");
+                console.log(response);
+                console.log(response._embedded.classifications[i]);
+                $("$results").text(response);
+            };
+        });
 
-
+    };
 
 });
+
+
+
+
+
+
+
