@@ -22,14 +22,16 @@ $(document).ready(function () {
         }).then(function (response) {
             for (i = 0; i < 10; i++) {
                 console.log("eventSearch")
-                console.log(response._embedded.events[i].dates.start.localTime)
+                console.log(response._embedded.events[i])
                 let result = {
                     name : response._embedded.events[i].name,
                     date : response._embedded.events[i].dates.start.localDate,
-                    time : response._embedded.events[i].dates.start.localTime
+                    time : response._embedded.events[i].dates.start.localTime,
+                    image: response._embedded.events[i].images[8].url
+                
                 }
                 console.log(result.name, result.date, result.time)
-                $("#results").append(result.name + " " + result.date + " " + result.time + "</br>")
+                $("#results").append(result.name + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
             }
         });
     };
