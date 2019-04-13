@@ -20,7 +20,7 @@ $(document).ready(function () {
         const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
         const apiTM = "https://app.ticketmaster.com/discovery/v2/"
         let keyword = "keyword=" + $("#searchField").val() + "&";
-        let zip = "postalCode=" + $("#zipCode").val();
+        let zip = "city=" + $("#city").val();
         if ($("#searchField").val() !== ""){
             let query = apiTM + "events.json?" + apiKey + keyword + zip
             api(query);
