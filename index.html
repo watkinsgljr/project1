@@ -7,58 +7,71 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
     <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
     <title>EventHub</title>
 </head>
 
 <body>
 
 
-    
+
+
+
 
     <div id="main-container">
         <header>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <div class="text-center">
+                        <a href="" class="btn btn-orange btn-rounded" id="sign-in-button" data-toggle="modal"
+                            data-target="#darkModalForm">Sign
+                            Up
+                            Now!</a>
+                    </div>
+            </ul>
+
+
+            <!-- <h1>WORK HARD, PLAY HARDER</h1> -->
             <div id="header-photo-div">
                 <img id="header-photo" src="./assets/images/photo-1501281668745-f7f57925c3b4.jpg">
             </div>
 
             <!-- Card -->
 
-<div class="card card-cascade wider reverse">
+            <div class="card card-cascade wider reverse">
 
-        <!-- Card image -->
-        <!-- <div class="view view-cascade overlay">
-          <img class="card-img-top" id="header-photo" src="./assets/images/photo-1501281668745-f7f57925c3b4.jpg" alt="Card image cap">
-          <a href="">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div> -->
-      
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-      
-          <!-- Title -->
-          <h4 class="card-title"><strong>My adventure</strong></h4>
-          <!-- Subtitle -->
-          <h6 class="font-weight-bold indigo-text py-2">Photography</h6>
-          <!-- Text -->
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem perspiciatis voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit, placeat laborum ut beatae ullam suscipit veniam.
-          </p>
-      
-          <!-- Linkedin -->
-          <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
-          <!-- Twitter -->
-          <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
-          <!-- Dribbble -->
-          <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
-      
-        </div>
-      
-      </div>
-      <!-- Card -->
+                <!-- Card content -->
+                <div class="card-body card-body-cascade text-center" id="search-card">
+
+                    <div class="md-form mb-5 search-card-input-div">
+                        <input type="text" id="keyword-search"
+                            class="search-card-input form-control validate black-text">
+                        <label data-error="Please double check your input" data-success="right" for="keyword-search">By
+                            City</label>
+                    </div>
+                    <div class="md-form mb-5 search-card-input-div">
+                        <input type="text" id="city-search" class="search-card-input form-control validate black-text">
+                        <label data-error="Please double check your input" data-success="right" for="city-search">By
+                            Keyword</label>
+                    </div>
+                    <div class="md-form mb-5 search-card-input-div">
+                        <input type="text" id="date-search" class="search-card-input form-control validate black-text">
+                        <label data-error="Please double check your input" data-success="right" for="date-search">By
+                            Date</label>
+
+
+                    </div>
+                    <!-- Card -->
         </header>
-        <div class="text-center">
-            <a href="" class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#darkModalForm">Sign Up Now!</a>
-        </div>
+
         <!----------------------------------------------------- EVENT CARD CODE ---------------------------------------------------------------->
         <div class="grid-container">
             <div class="item item-1">
@@ -310,7 +323,7 @@
         <!----------------------------------------------------- COMPLETE PROFILE MODAL ---------------------------------------------------------------->
 
 
-        <!----------------------------------------------------- EVENT CARD CODE ---------------------------------------------------------------->
+
 
 
 
