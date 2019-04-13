@@ -20,7 +20,12 @@ $(document).ready(function () {
         const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
         const apiTM = "https://app.ticketmaster.com/discovery/v2/"
         let keyword = "keyword=" + $("#searchField").val() + "&";
-        let zip = "postalCode=" + $("#zipCode").val();
+        let zip = "postalCode=" + $("#city").val();
+        $('input[type=checkbox]').each(function () {
+            if (this.checked) {
+                console.log($(this).val()); 
+            }
+        });
         if ($("#searchField").val() !== ""){
             let query = apiTM + "events.json?" + apiKey + keyword + zip
             api(query);
@@ -56,49 +61,10 @@ $(document).ready(function () {
         });
     };
 
-
-    // function apiVenue(){
-    //     console.log(eventSearch)
-    //     const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
-    //     const apiTM = "https://app.ticketmaster.com/discovery/v2/"
-    //     let keyword = "keyword=Aerosmith"
-    //     let query = apiTM + "events.json?" + apiKey
-    //     console.log(query);
-    //     $.ajax({
-    //         url: query,
-    //         method: "GET"
-    //     }).then(function (response) {
-    //         for (i = 0; i < 10; i++) {
-    //             console.log("eventSearch")
-    //             console.log(response._embedded.events[i].classifications[0].genre.name)
-    //             console.log(response._embedded.events[i])
-    //             $("#results").append(response._embedded.events[i].name + " " + response._embedded.events[i].dates.start.localDate + " " + response._embedded.events[i].dates.start.localTime + "</br>")
-    //         }
-    //     });
-    // };
-
-    // }
+function parkApi(){
 
 
-    // function apiClass(classSearch) {
-    //     console.log(classSearch)
-    //     const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY"
-    //     const apiTM = "https://app.ticketmaster.com/discovery/v2/"
-    //     let query = apiTM + "classifications.json?" + apiKey
-    //     console.log(query);
-    //     $.ajax({
-    //         url: query,
-    //         method: "GET"
-    //     }).then(function (response) {
-    //         for (i = 0; i < 10; i++) {
-    //             console.log("classSearch");
-    //             console.log(response);
-    //             console.log(response._embedded.classifications[i]);
-    //             $("$results").text(response);
-    //         };
-    //     });
-
-    // };
+}
 
 });
 
