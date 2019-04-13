@@ -35,6 +35,7 @@ https://www.linkedin.com/in/christopher-stroupe-7004977b/
 - jQUERY
 - Javascript
 - Firebase
+- Bootstrap
 
 ## APIs
 - Ticketmaster
