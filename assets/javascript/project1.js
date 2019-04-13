@@ -3,9 +3,7 @@ $(document).ready(function () {
     $(document).on("click", "#searchButton", function () {
         var search = $("#searchField").val()
         apiEvents(search);
-        // apiClass(search);
     });
-    // console.log(result.name)
 
     // $("#searchField").keyup(function (event) {
     //     if (event.keyCode === 13) {
@@ -22,9 +20,21 @@ $(document).ready(function () {
         const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
         const apiTM = "https://app.ticketmaster.com/discovery/v2/"
         let keyword = "keyword=" + $("#searchField").val() + "&";
-        let zip = "postal=" + $("#zipCode").val();
-        let query = apiTM + "events.json?" + apiKey + keyword + zip 
-        console.log(query);
+        let zip = "postalCode=" + $("#zipCode").val();
+        if ($("#searchField").val() !== ""){
+            let query = apiTM + "events.json?" + apiKey + keyword + zip
+            api(query);
+            console.log("keyword");
+            console.log(query);
+        }else{
+            let query = apiTM + "events.json?" + apiKey + zip
+            api(query)
+            console.log("no keyword");
+            console.log(query);
+        }
+
+    }
+        function api(query){
         $.ajax({
             url: query,
             method: "GET"
@@ -45,6 +55,7 @@ $(document).ready(function () {
             }
         });
     };
+
 
     // function apiVenue(){
     //     console.log(eventSearch)
