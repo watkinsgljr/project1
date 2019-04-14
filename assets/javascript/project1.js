@@ -44,7 +44,7 @@ $(document).ready(function () {
             url: query,
             method: "GET"
         }).then(function (response) {
-            for (i = 0; i < 10; i++) {
+            for (i = 0; i < 1; i++) {
                 console.log("eventSearch")
                 console.log(response._embedded.events[i])
                 let result = {
@@ -55,13 +55,21 @@ $(document).ready(function () {
                     venue: response._embedded.events[i]._embedded.venues[0].name
                 
                 }
-                // console.log(result.name, result.date, result.time)
+            googleApi(result.venue);
                 $("#results").append(result.name + " " + result.venue + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
             }
         });
     };
 
-function parkApi(){
+function googleApi(venue){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    let query = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&inputtype=textquery&input=" + venue + "&" + googleKey + "&fields=place_id"
+    $.ajax({
+        url: query,
+        method: "GET",
+    }).then(function (answer){
+        console.log(answer)
+    })
 
 
 }
