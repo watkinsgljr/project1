@@ -55,24 +55,43 @@ $(document).ready(function () {
                     venue: response._embedded.events[i]._embedded.venues[0].name
                 
                 }
-            googleApi(result.venue);
+            googleId(result.venue);
                 $("#results").append(result.name + " " + result.venue + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
             }
         });
     };
 
-function googleApi(venue){
+function googleId(id){
     const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
-    let query = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&inputtype=textquery&input=" + venue + "&" + googleKey + "&fields=place_id"
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&inputtype=textquery&input=' + id + "&" + googleKey + "&fields=place_id"
+    const URL = PROXY_URL + TARGET_URL
+    // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
     $.ajax({
-        url: query,
+        url: URL,
         method: "GET",
     }).then(function (answer){
-        console.log(answer)
+        console.log(answer.candidates[0].place_id)
+        googlePlace(answer.candidates[0].place_id)
     })
+};
+
+function googlePlace(venue){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/details/json?&placeid=' + venue + "&" + googleKey + "&fields=url"
+    const URL = PROXY_URL + TARGET_URL
+    $.ajax({
+        url: URL,
+        method: "GET",
+    }).then(function (answer){
+        console.log(answer.result.url)
+        $("$map").append("<a href=" + answer.result.url + "/>")
+    })
+};
 
 
-}
+
 
 });
 
