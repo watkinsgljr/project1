@@ -93,16 +93,17 @@ function googlePlace(venue){
         url: URL,
         method: "GET",
     }).then(function (answer){
-        console.log(answer)
+        // console.log(answer)
         // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LAT,LONG&radius=500&types=parking&sensor=false&key=APIKEY
         $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
+
     })
 };
 
 function googlePark(lat, long){
     const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
     const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + "," + long + "&radius=10&" + googleKey + "&type=parking"
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + lat + "," + long + "&radius=100&" + googleKey + "&type=parking"
     const URL = PROXY_URL + TARGET_URL
     // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
     $.ajax({
@@ -110,6 +111,9 @@ function googlePark(lat, long){
         method: "GET",
     }).then(function (parking){
         console.log(parking)
+        console.log(TARGET_URL)
+        $("#parking").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + "'></iframe>")
+
     })
 
 }
