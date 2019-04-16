@@ -5,19 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
     <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
     <title>EventHub</title>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./assets/javascript/project1.js"></script>
-
 </head>
 
 <body>
+
 
 
 
@@ -36,226 +31,83 @@
                     <a class="nav-link" href="#">Link</a>
                 </li>
                 <div class="text-center">
-                        <a href="" class="btn btn-orange btn-rounded" id="sign-in-button" data-toggle="modal"
-                            data-target="#darkModalForm">Sign
-                            Up
-                            Now!</a>
-                    </div>
+                    <a href="" class="btn btn-orange btn-rounded" id="sign-in-button" data-toggle="modal"
+                        data-target="#darkModalForm">Sign
+                        Up
+                        Now!</a>
+                </div>
             </ul>
 
 
             <!-- <h1>WORK HARD, PLAY HARDER</h1> -->
             <div id="header-photo-div">
-                <img id="header-photo" src="./assets/images/photo-1501281668745-f7f57925c3b4.jpg"> </div>
+                <img id="header-photo" src="./assets/images/photo-1501281668745-f7f57925c3b4.jpg">
+            </div>
+
+
+            <!-----------------------------------------------SEARCH CARD--------------------------------------------------------------->
 
             <!-- Card -->
+
             <div class="card card-cascade wider reverse">
 
-                <!-- Card image -->
-                <!-- <div class="view view-cascade overlay">
-          <img class="card-img-top" id="header-photo" src="./assets/images/photo-1501281668745-f7f57925c3b4.jpg" alt="Card image cap">
-          <a href="">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div> -->
-
                 <!-- Card content -->
-                <div class="card-body card-body-cascade text-center">
+                <div class="card-body card-body-cascade text-center" id="search-card">
 
-                    <!-- Title -->
-                    <h4 class="card-title"><strong>My adventure</strong></h4>
-                    <!-- Subtitle -->
-                    <h6 class="font-weight-bold indigo-text py-2">Photography</h6>
-                    <!-- Text -->
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem
-                        perspiciatis voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta
-                        reprehenderit, placeat laborum ut beatae ullam suscipit veniam.
-                    </p>
-
-                    <!-- Linkedin -->
-                    <a class="px-2 fa-lg li-ic"><i class="fab fa-linkedin-in"></i></a>
-                    <!-- Twitter -->
-                    <a class="px-2 fa-lg tw-ic"><i class="fab fa-twitter"></i></a>
-                    <!-- Dribbble -->
-                    <a class="px-2 fa-lg fb-ic"><i class="fab fa-facebook-f"></i></a>
-
+                    <div class="md-form mb-5 search-card-input-div">
+                        <input type="text" id="city-search" class="search-card-input form-control validate black-text">
+                        <label data-error="Please double check your input" data-success="right" for="city-search">By
+                            City</label>
+                    </div>
+                    <div class="md-form mb-5 search-card-input-div">
+                        <input type="text" id="keyword-search"
+                            class="search-card-input form-control validate black-text">
+                        <label data-error="Please double check your input" data-success="right" for="keyword-search">By
+                            Keyword</label>
+                    </div>
+                    <div class="md-form mb-5 search-card-input-div">
+                        <input type="text" id="date-search" class="search-card-input form-control validate black-text">
+                        <label data-error="Please double check your input" data-success="right" for="date-search">By
+                            Date</label>
+                    </div>
+                </div>
+            </div>
+            <div id="search-button-div">
+                <div class="text-center">
+                    <a href="" class="btn btn-orange btn-rounded" id="search-button"
+                        data-target="searchField">Search</a>
                 </div>
 
             </div>
             <!-- Card -->
+
+
         </header>
-        <div class="text-center">
-            <a href="" class="btn btn-orange btn-rounded" data-toggle="modal" data-target="#darkModalForm">Sign Up
-                Now!</a>
-        </div>
+
         <!----------------------------------------------------- EVENT CARD CODE ---------------------------------------------------------------->
-
-        <div class="container">
-            <div class="text-center mt-5" id="Header">
-
-                <div>
-                    <input type="search" class="form-control col-md-4 mt-5 text-center" id="searchField"
-                        name="eventSearch" value="" placeholder="Keyword">
-                    <input type="text" id="city" value="" placeholder="City">
-                </div>
-                <button type="button" id="searchButton" class="btn btn-success m-5">New
-                    Search</button>
-
-            </div>
-        </div>
         <div class="grid-container">
             <div class="item item-1">
-
-                <!-- Card -->
-                <div class="card">
-
-                    <!-- Card image -->
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                        alt="Card image cap">
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Title -->
-                        <h4 class="card-title"><a>Event Name</a></h4>
-                        <!-- Text -->
-                        <p class="card-text">Some quick example text to build on the Event Name and make up the bulk of
-                            the card's content.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary">Button</a>
-
-                    </div>
-
-                </div>
-                <!-- Card -->
             </div>
+
             <div class="item item-2">
-
-                <!-- Card -->
-                <div class="card">
-
-                    <!-- Card image -->
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                        alt="Card image cap">
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Title -->
-                        <h4 class="card-title"><a>Event Name</a></h4>
-                        <!-- Text -->
-                        <p class="card-text">Some quick example text to build on the Event Name and make up the bulk of
-                            the card's content.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary">Button</a>
-
-                    </div>
-
-                </div>
-                <!-- Card -->
             </div>
+
             <div class="item item-3">
-
-                <!-- Card -->
-                <div class="card">
-
-                    <!-- Card image -->
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                        alt="Card image cap">
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Title -->
-                        <h4 class="card-title"><a>Event Name</a></h4>
-                        <!-- Text -->
-                        <p class="card-text">Some quick example text to build on the Event Name and make up the bulk of
-                            the card's content.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary">Button</a>
-
-                    </div>
-
-                </div>
-                <!-- Card -->
             </div>
+
             <div class="item item-4">
-
-                <!-- Card -->
-                <div class="card">
-
-                    <!-- Card image -->
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                        alt="Card image cap">
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Title -->
-                        <h4 class="card-title"><a>Event Name</a></h4>
-                        <!-- Text -->
-                        <p class="card-text">Some quick example text to build on the Event Name and make up the bulk of
-                            the card's content.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary">Button</a>
-
-                    </div>
-
-                </div>
-                <!-- Card -->
             </div>
+
             <div class="item item-5">
-
-                <!-- Card -->
-                <div class="card">
-
-                    <!-- Card image -->
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                        alt="Card image cap">
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Title -->
-                        <h4 class="card-title"><a>Event Name</a></h4>
-                        <!-- Text -->
-                        <p class="card-text">Some quick example text to build on the Event Name and make up the bulk of
-                            the card's content.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary">Button</a>
-
-                    </div>
-
-                </div>
-                <!-- Card -->
             </div>
+
             <div class="item item-6">
-
-                <!-- Card -->
-                <div class="card">
-
-                    <!-- Card image -->
-                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg"
-                        alt="Card image cap">
-
-                    <!-- Card content -->
-                    <div class="card-body">
-
-                        <!-- Title -->
-                        <h4 class="card-title"><a>Event Name</a></h4>
-                        <!-- Text -->
-                        <p class="card-text">Some quick example text to build on the Event Name and make up the bulk of
-                            the card's content.</p>
-                        <!-- Button -->
-                        <a href="#" class="btn btn-primary">Button</a>
-
-
-
-                    </div>
-
-                </div>
-                <!-- Card -->
             </div>
+        </div>
+
+
+        <div class="text-center">
+            <a href="./event-table.html" class="btn btn-orange btn-rounded" id="see-more">See More</a>
         </div>
 
 
@@ -303,9 +155,9 @@
                                     for="Form-name6">Your Last Name</label>
                             </div>
                             <div class="md-form mb-5">
-                                <input type="text" id="Form-zip" class="form-control validate white-text">
+                                <input type="text" id="Form-city" class="form-control validate white-text">
                                 <label data-error="Please double check your input" data-success="right"
-                                    for="Form-zip">Your Zip Code</label>
+                                    for="Form-city">Your City</label>
                             </div>
 
                             <div class="form-check pb-3">
@@ -339,8 +191,6 @@
                                             href="#" class="orange-text ml-1 font-weight-bold">
                                             Log in</a></p>
                                 </div>
-
-
                                 <!--Grid column-->
 
                             </div>
@@ -383,28 +233,22 @@
         <!-- JQuery -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
-        </script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
         <!-- JavaScript -->
         <script src="./assets/javascript/project1.js"></script>
         <!-- Bootstrap core JavaScript -->
         <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js">
-        </script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
-
-        <!-- DISCARDED TERMS AND CONDITIONS -->
-        <!-- <input class="form-check-input" type="checkbox" id="checkbox624">
-                                <label for="checkbox624" class="white-text form-check-label">Accept the
-                                    <a href="#" class="orange-text font-weight-bold">
-                                        Terms and Conditions
-                                    </a>
-                                </label> -->
 
 </body>
 
 
 
-</html>
+</htss
