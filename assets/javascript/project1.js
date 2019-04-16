@@ -47,7 +47,7 @@ $(document).ready(function () {
         }).then(function (response) {
             for (i = 0; i < 1; i++) {
                 // console.log("eventSearch")
-                // console.log(response._embedded.events[i])
+                console.log(response._embedded.events[i])
                 let result = {
                     name : response._embedded.events[i].name,
                     date : response._embedded.events[i].dates.start.localDate,
@@ -55,11 +55,12 @@ $(document).ready(function () {
                     image: response._embedded.events[i].images[8].url,
                     venue: response._embedded.events[i]._embedded.venues[0].name,
                     lat: response._embedded.events[i]._embedded.venues[0].location.latitude,
-                    long: response._embedded.events[i]._embedded.venues[0].location.longitude
+                    long: response._embedded.events[i]._embedded.venues[0].location.longitude,
+                    tickets: response._embedded.events[i].url
                 }
             googleId(result.venue);
             googlePark(result.venue); // this is the parking map function
-                $("#results").append(result.name + " " + result.venue + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
+                $("#results").append(result.name + " " + result.venue + " " + result.date + " " + result.time + " " + result.tickets + "<img src='" + result.image + "' height='200' /></br>")
             }
         });
     };
