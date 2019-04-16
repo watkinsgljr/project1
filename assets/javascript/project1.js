@@ -58,7 +58,7 @@ $(document).ready(function () {
                     long: response._embedded.events[i]._embedded.venues[0].location.longitude
                 }
             googleId(result.venue);
-            googlePark(result.venue)
+            googlePark(result.venue); // this is the parking map function
                 $("#results").append(result.name + " " + result.venue + " " + result.date + " " + result.time + " " + "<img src='" + result.image + "' height='200' /></br>")
             }
         });
