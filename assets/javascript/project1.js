@@ -25,6 +25,8 @@ $(document).ready(function () {
     LOGGEDOFF: 1,
     LOGGEDIN: 2,
   };
+
+  var map = 0;
   //-------------------------------------------------DATA TABLE LOGIC------------------------------------------------
   let database = firebase.database();
   let queryObjectRef = database.ref("/queryObj")
@@ -128,6 +130,8 @@ $(document).ready(function () {
   $(document).on("click", "#search-button", function () {
     event.preventDefault();
     var search = $("#city-search").val()
+    var keyword = $("#keyword-search").val()
+    var date = $("#date-search").val()
     apiEvents(search);
   });
 
@@ -142,13 +146,15 @@ $(document).ready(function () {
     let keyword = "keyword=" + $("#keyword-search").val() + "&";
     let city = "city=" + $("#city-search").val() + "&";
     let size = "size=6";
+    // var keyword = $("#keyword-search").val() + "&";
+    var date = "startDateTime" + $("#date-search").val() + "&";
     if ($("#city-search").val() !== "") {
-      let query = apiTM + "events.json?" + apiKey + keyword + city;
+      let query = apiTM + "events.json?" + apiKey + keyword + city + date;
       api(query);
     //   console.log("keyword");
     //   console.log(query);
     } else {
-      let query = apiTM + "events.json?" + apiKey + city;
+      let query = apiTM + "events.json?" + apiKey + city + date;
       api(query)
     //   console.log("no keyword");
     //   console.log(query);
@@ -160,10 +166,10 @@ $(document).ready(function () {
       url: query,
       method: "GET"
     }).then(function (response) {
-      console.log(response);
+    //   console.log(response);
       for (i = 0; i < 6; i++) {
-        console.log("eventSearch")
-        console.log(response._embedded.events[i])
+        // console.log("eventSearch")
+        // console.log(response._embedded.events[i])
         let result = {
           name: response._embedded.events[i].name,
           date: response._embedded.events[i].dates.start.localDate,
@@ -193,7 +199,7 @@ $(document).ready(function () {
         url: URL,
         method: "GET",
     }).then(function (answer){
-        console.log(answer.candidates[0].place_id)
+        // console.log(answer.candidates[0].place_id)
         googlePlace(answer.candidates[0].place_id)
     })
 };
@@ -226,10 +232,10 @@ function googlePark(venue){
         url: URL,
         method: "GET",
     }).then(function (parking){
-        console.log(parking)
-        console.log(TARGET_URL)
-        $("#parking").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>")
-
+        // console.log(parking)
+        // console.log(TARGET_URL)
+        var map = $("#parking").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>")
+        console.log(map)
     })
 
 }
@@ -254,17 +260,18 @@ function googlePark(venue){
     let eventTitleText;
     let eventDate = $("<p>");
     let eventButton = $("<a>");
+    let cardBack = map
     let eventURL;
     // EVENT CARD---------------------------------------------------
     eventCard.addClass("card");
 
     //EVENT IMAGE---------------------------------------------------
-    cardImage.addClass("card-img-top");
+    cardImage.addClass("card-img-top flip flip-inner");
     cardImage.attr("alt", "card image cap");
     cardImage.attr("src", result.image);
     cardImage.prependTo(eventCard);
     //CARD BODY ELEMENTS--------------------------------------------
-    cardBody.addClass("card-body");
+    cardBody.addClass("card-body flip flip-inner");
     eventTitle.addClass("card-title");
     eventTitle.text(result.name)
     eventDate.addClass("card-text");
