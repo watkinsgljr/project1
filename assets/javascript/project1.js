@@ -145,13 +145,13 @@ $(document).ready(function () {
     if ($("#city-search").val() !== "") {
       let query = apiTM + "events.json?" + apiKey + keyword + city;
       api(query);
-      console.log("keyword");
-      console.log(query);
+    //   console.log("keyword");
+    //   console.log(query);
     } else {
       let query = apiTM + "events.json?" + apiKey + city;
       api(query)
-      console.log("no keyword");
-      console.log(query);
+    //   console.log("no keyword");
+    //   console.log(query);
     }
 
   }
@@ -169,16 +169,70 @@ $(document).ready(function () {
           date: response._embedded.events[i].dates.start.localDate,
           time: response._embedded.events[i].dates.start.localTime,
           image: response._embedded.events[i].images[8].url,
-          venue: response._embedded.events[i]._embedded.venues[0].name
+          venue: response._embedded.events[i]._embedded.venues[0].name,
+          tickets: response._embedded.events[i].url
 
         }
         createEventCards(result, i);
-        
+        googleId(result.venue);
+        // this is the parking map function
+        googlePark(result.venue); 
+
       }
     });
   };
 
 
+  function googleId(id){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&inputtype=textquery&input=' + id + "&" + googleKey + "&fields=place_id"
+    const URL = PROXY_URL + TARGET_URL
+    // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
+    $.ajax({
+        url: URL,
+        method: "GET",
+    }).then(function (answer){
+        console.log(answer.candidates[0].place_id)
+        googlePlace(answer.candidates[0].place_id)
+    })
+};
+
+    // function to gain detailed data using place_id
+
+function googlePlace(venue){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    // edit the fields of the below target URL to change the data we are getting back
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/details/json?&placeid=' + venue + "&" + googleKey + "&fields=url"
+    const URL = PROXY_URL + TARGET_URL
+    $.ajax({
+        url: URL,
+        method: "GET",
+    }).then(function (answer){
+        // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LAT,LONG&radius=500&types=parking&sensor=false&key=APIKEY
+        $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
+
+    })
+};
+
+function googlePark(venue){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const TARGET_URL = 'https://www.google.com/maps/embed/v1/search?q=parking+near+'
+    const URL = PROXY_URL + TARGET_URL + venue + "&" + googleKey
+    // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
+    $.ajax({
+        url: URL,
+        method: "GET",
+    }).then(function (parking){
+        console.log(parking)
+        console.log(TARGET_URL)
+        $("#parking").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>")
+
+    })
+
+}
 
 
   //-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
