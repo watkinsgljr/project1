@@ -94,7 +94,6 @@ function googlePlace(venue){
         url: URL,
         method: "GET",
     }).then(function (answer){
-        // console.log(answer)
         // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LAT,LONG&radius=500&types=parking&sensor=false&key=APIKEY
         $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
 
