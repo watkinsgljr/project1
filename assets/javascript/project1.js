@@ -235,7 +235,7 @@ function googlePark(venue){
         // console.log(parking)
         // console.log(TARGET_URL)
         var map = $("#parking").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>")
-        console.log(map)
+        return map;
     })
 
 }
@@ -282,7 +282,10 @@ function googlePark(venue){
     eventTitle.prependTo(cardBody);
     eventDate.appendTo(cardBody);
     eventButton.appendTo(cardBody);
-    eventCard.prependTo($(".item-" + gridLocation))
+    eventCard.prependTo($(".item-" + gridLocation));
+    console.log(cardBack);
+    cardBack.text("test");
+
   }
 
 
