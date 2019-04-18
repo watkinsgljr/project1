@@ -26,7 +26,8 @@ $(document).ready(function () {
     LOGGEDIN: 2,
   };
 
-  var map = 0;
+  var parkingData = null;
+
   //-------------------------------------------------DATA TABLE LOGIC------------------------------------------------
   let database = firebase.database();
   let queryObjectRef = database.ref("/queryObj")
@@ -167,9 +168,7 @@ $(document).ready(function () {
       method: "GET"
     }).then(function (response) {
     //   console.log(response);
-      for (i = 0; i < 6; i++) {
-        // console.log("eventSearch")
-        // console.log(response._embedded.events[i])
+      for (i = 0; i < 1; i++) {
         let result = {
           name: response._embedded.events[i].name,
           date: response._embedded.events[i].dates.start.localDate,
@@ -179,11 +178,10 @@ $(document).ready(function () {
           tickets: response._embedded.events[i].url
 
         }
-        createEventCards(result, i);
         googleId(result.venue);
         // this is the parking map function
         googlePark(result.venue); 
-
+        createEventCards(result, i);
       }
     });
   };
@@ -199,7 +197,6 @@ $(document).ready(function () {
         url: URL,
         method: "GET",
     }).then(function (answer){
-        // console.log(answer.candidates[0].place_id)
         googlePlace(answer.candidates[0].place_id)
     })
 };
@@ -216,7 +213,6 @@ function googlePlace(venue){
         url: URL,
         method: "GET",
     }).then(function (answer){
-        // https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=LAT,LONG&radius=500&types=parking&sensor=false&key=APIKEY
         $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
 
     })
@@ -228,30 +224,45 @@ function googlePark(venue){
     const TARGET_URL = 'https://www.google.com/maps/embed/v1/search?q=parking+near+'
     const URL = PROXY_URL + TARGET_URL + venue + "&" + googleKey
     // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
+    var map2;
     $.ajax({
+        async: false,
         url: URL,
         method: "GET",
-    }).then(function (parking){
-        // console.log(parking)
-        // console.log(TARGET_URL)
-        var map = $("#parking").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>")
-        return map;
+        success: function (){
+            var map ="<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
+            map2 = map;
+        },
     })
+    mappingData(map2)
 
+
+    
+    // .then (function (map){
+    //     // console.log(parking)
+    //     // console.log(TARGET_URL)
+    //     var map ="<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
+    //     return map;
+    // })
+    
 }
 
+function mappingData(mapData){
+    parkingData = mapData
+}
+    
+//-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
 
-  //-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
-
-  let queryResultsArray = [];
+let queryResultsArray = [];
 
 
-  function createEventCards(result, index) {
+function createEventCards(result, index) {
     $('#city-search').val("")
     $('#keyword-search').val("")
     $("#date-search").val("");
     gridLocation = index + 1;
-
+    console.log(parkingData)
+    
     // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
     let eventCard = $("<div>");
     let cardImage = $("<img>");
@@ -260,33 +271,40 @@ function googlePark(venue){
     let eventTitleText;
     let eventDate = $("<p>");
     let eventButton = $("<a>");
-    let cardBack = map
+    let cardBack = parkingData;
     let eventURL;
     // EVENT CARD---------------------------------------------------
     eventCard.addClass("card");
+    eventCard.attr("id", "card")
 
     //EVENT IMAGE---------------------------------------------------
-    cardImage.addClass("card-img-top flip flip-inner");
+    cardImage.addClass("card-img-top front");
     cardImage.attr("alt", "card image cap");
     cardImage.attr("src", result.image);
     cardImage.prependTo(eventCard);
     //CARD BODY ELEMENTS--------------------------------------------
-    cardBody.addClass("card-body flip flip-inner");
-    eventTitle.addClass("card-title");
+    cardBody.addClass("card-body front");
+    eventTitle.addClass("card-title front");
     eventTitle.text(result.name)
-    eventDate.addClass("card-text");
+    eventDate.addClass("card-text front");
     eventDate.text(result.date);
-    eventButton.addClass("btn btn-primary");
+    eventButton.addClass("btn btn-primary front");
     eventButton.text("See More");
     cardBody.appendTo(eventCard);
     eventTitle.prependTo(cardBody);
     eventDate.appendTo(cardBody);
     eventButton.appendTo(cardBody);
     eventCard.prependTo($(".item-" + gridLocation));
-    console.log(cardBack);
-    cardBack.text("test");
+
 
   }
+
+  $(document).on("click", "#card", function (){
+      $("#card").flip();
+    console.log("flip")
+  })
+  
+  
 
 
 });
