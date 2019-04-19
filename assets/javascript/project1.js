@@ -168,7 +168,7 @@ $(document).ready(function () {
       method: "GET"
     }).then(function (response) {
     //   console.log(response);
-      for (i = 0; i < 1; i++) {
+      for (i = 0; i < 6; i++) {
         let result = {
           name: response._embedded.events[i].name,
           date: response._embedded.events[i].dates.start.localDate,
@@ -262,13 +262,15 @@ function createEventCards(result, index) {
     $('#keyword-search').val("")
     $("#date-search").val("");
     gridLocation = index + 1;
-    console.log(parkingData)
-    let eventCard = "<div class='card' id='card'>"
-    let cardFront = "<div class='front'>" + result.name + "</div>"
-    let cardBack = "<div class= 'back'>" + parkingData
-    $("#test").append(eventCard + cardFront + cardBack)
-    console.log(eventCard + cardFront + cardBack + "</div>")
-    
+    let eventCard = "<div id='card' class='card item item-" + gridLocation + "' >"
+    let eventImg = "<img class='front' id='eventImg' src='" + result.image + "' />"
+    let cardData = "<div class='back'>" + result.name
+    let cardMap = "<div class= 'back'>" + parkingData   + "</div>"
+    let cardComplete = eventCard + eventImg + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
+    console.log(eventCard + cardData + cardMap + "</div>")
+    $(".item-" + gridLocation).append(cardComplete);
+
+    // card flip libray @: https://nnattawat.github.io/flip/
     $("#card").flip();
     
 
