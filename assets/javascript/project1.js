@@ -46,7 +46,7 @@ $(document).ready(function () {
   //-------------------------------------------------CREATE DATA TABLE BASED ON USER SEARCH-------------------------------
 
   $("#see-more").on("click", function generateEventTable() {
-    for (i = 0; i < 100; i++);
+    for (i = 0; i < 1; i++);
     event = result.url;
     name = result.name;
     location = result.venue;
@@ -262,49 +262,60 @@ function createEventCards(result, index) {
     $("#date-search").val("");
     gridLocation = index + 1;
     console.log(parkingData)
+    let eventCard = "<div class='card' id='card'>"
+    let cardFront = "<div class='front'>" + result.name + "</div>"
+    let cardBack = "<div class= 'back'>" + parkingData
+    $("#test").append(eventCard + cardFront + cardBack)
+    console.log(eventCard + cardFront + cardBack + "</div>")
     
-    // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
-    let eventCard = $("<div>");
-    let cardImage = $("<img>");
-    let cardBody = $("<div>");
-    let eventTitle = $("<a>");
-    let eventTitleText;
-    let eventDate = $("<p>");
-    let eventButton = $("<a>");
-    let cardBack = parkingData;
-    let eventURL;
-    // EVENT CARD---------------------------------------------------
-    eventCard.addClass("card");
-    eventCard.attr("id", "card")
+    $("#card").flip();
+    
 
-    //EVENT IMAGE---------------------------------------------------
-    cardImage.addClass("card-img-top front");
-    cardImage.attr("alt", "card image cap");
-    cardImage.attr("src", result.image);
-    cardImage.prependTo(eventCard);
-    //CARD BODY ELEMENTS--------------------------------------------
-    cardBody.addClass("card-body front");
-    eventTitle.addClass("card-title front");
-    eventTitle.text(result.name)
-    eventDate.addClass("card-text front");
-    eventDate.text(result.date);
-    eventButton.addClass("btn btn-primary front");
-    eventButton.text("See More");
-    cardBody.appendTo(eventCard);
-    eventTitle.prependTo(cardBody);
-    eventDate.appendTo(cardBody);
-    eventButton.appendTo(cardBody);
-    eventCard.prependTo($(".item-" + gridLocation));
+    
+    // // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
+    // let eventCard = $("<div>");
+    // let cardImage = $("<img>");
+    // let cardBody = $("<div>");
+    // let eventTitle = $("<a>");
+    // let eventTitleText;
+    // let eventDate = $("<p>");
+    // let eventButton = $("<a>");
+    // let cardBack = parkingData;
+    // let eventURL;
+    // // EVENT CARD---------------------------------------------------
+    // eventCard.addClass("card");
+    // eventCard.attr("id", "card")
+
+    // //EVENT IMAGE---------------------------------------------------
+    // cardImage.addClass("card-img-top front");
+    // cardImage.attr("alt", "card image cap");
+    // cardImage.attr("src", result.image);
+    // cardImage.prependTo(eventCard);
+    // //CARD BODY ELEMENTS--------------------------------------------
+    // cardBody.addClass("card-body front");
+    // eventTitle.addClass("card-title front");
+    // eventTitle.text(result.name)
+    // eventDate.addClass("card-text front");
+    // eventDate.text(result.date);
+    // eventButton.addClass("btn btn-primary front");
+    // eventButton.text("See More");
+    // cardBody.appendTo(eventCard);
+    // eventTitle.prependTo(cardBody);
+    // eventDate.appendTo(cardBody);
+    // eventButton.appendTo(cardBody);
+    // eventCard.prependTo($(".item-" + gridLocation));
+
+    
+    
+}
+
+$("#card").flip();
+$(document).on("click", "#card", function (){
+  $("#card").flip();
+  console.log("flip")
+})
 
 
-  }
-
-  $(document).on("click", "#card", function (){
-      $("#card").flip();
-    console.log("flip")
-  })
-  
-  
 
 
 });
