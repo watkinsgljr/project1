@@ -178,6 +178,7 @@ $(document).ready(function () {
           tickets: response._embedded.events[i].url
 
         }
+        console.log(result)
         googleId(result.venue);
         // this is the parking map function
         googlePark(result.venue); 
