@@ -254,7 +254,6 @@ function mappingData(mapData){
     
 //-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
 
-let queryResultsArray = [];
 
 
 function createEventCards(result, index) {
@@ -262,16 +261,16 @@ function createEventCards(result, index) {
     $('#keyword-search').val("")
     $("#date-search").val("");
     gridLocation = index + 1;
-    let eventCard = "<div id='card' class='card item item-" + gridLocation + "' >"
+    let eventCard = "<div id='card-" + gridLocation + "' class='card item item-" + gridLocation + "' >"
     let eventImg = "<img class='front' id='eventImg' src='" + result.image + "' />"
     let cardData = "<div class='back'>" + result.name
     let cardMap = "<div class= 'back'>" + parkingData   + "</div>"
     let cardComplete = eventCard + eventImg + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
     console.log(eventCard + cardData + cardMap + "</div>")
     $(".item-" + gridLocation).append(cardComplete);
+    $("#card-" + gridLocation).flip();
 
     // card flip libray @: https://nnattawat.github.io/flip/
-    $("#card").flip();
     
 
     
@@ -313,11 +312,31 @@ function createEventCards(result, index) {
 }
 
 $("#card").flip();
-$(document).on("click", "#card", function (){
-  $("#card").flip();
+$(document).on("click", "#card-1", function (){
+  $("#card-1").flip();
   console.log("flip")
 })
 
+$(document).on("click", "#card-2", function (){
+  $("#card-2").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-3", function (){
+  $("#card-3").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-4", function (){
+  $("#card-4").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-5", function (){
+  $("#card-5").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-5", function (){
+  $("#card-6").flip();
+  console.log("flip")
+})
 
 
 
