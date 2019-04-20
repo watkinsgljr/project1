@@ -168,7 +168,7 @@ $(document).ready(function () {
       method: "GET"
     }).then(function (response) {
     //   console.log(response);
-      for (i = 0; i < 1; i++) {
+      for (i = 0; i < 6; i++) {
         let result = {
           name: response._embedded.events[i].name,
           date: response._embedded.events[i].dates.start.localDate,
@@ -263,7 +263,7 @@ function createEventCards(result, index) {
     gridLocation = index + 1;
     let eventCard = "<div id='card-" + gridLocation + "' class='item-" + gridLocation + "' >"
     let eventImg = "<img class='front card-img-top' id='eventImg' src='" + result.image + "' />"
-    let cardFront = "<p class='front'>Test</p>"
+    let cardFront = "<p class='front card-body'>Test</p>"
     let cardData = "<div class='back card-title'>" + result.name
     let cardMap = "<div class= 'back'>" + parkingData   + "</div>"
     let cardComplete = eventCard + eventImg + cardFront + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
