@@ -13,10 +13,37 @@
 
 <body>
 
+    <div id="event-page-main-container">
 
+        <div class="text-center">
+            <a href="" class="btn btn-orange btn-rounded" id="back-to-search-results-btn">Back To Results</a>
+        </div>
 
+        <div id="grid-container2">
+            <div class="item2 item-7">
+                Event Name
+            </div>
 
+            <div class="item2 item-8">
+                <!-- <img class="mic-pic"c src="assets/images/mic.jpg"> -->
+            </div>
 
+            <div class="item2 item-9">
+                <div class="event-page-date"></div>
+                <br>
+                <div class="event-page-time"></div>
+            </div>
+
+            <div class="item2 item-10">
+                Comment Box Here
+            </div>
+
+            <div class="item2 item-11">
+                Map Goes Here
+            </div>
+
+        </div>
+    </div>
 
     <div id="main-container">
         <header>
@@ -66,7 +93,8 @@
                             Keyword</label>
                     </div>
                     <div class="md-form mb-5 search-card-input-div">
-                        <input type="text" id="date-search" class="search-card-input form-control validate black-text">
+                        <input type="text" id="date-search"
+                            class="search-card-input form-control validate black-text bootstrap-iso form">
                         <label data-error="Please double check your input" data-success="right" for="date-search">By
                             Date</label>
                     </div>
@@ -107,7 +135,7 @@
 
 
         <div class="text-center">
-            <a href="./event-table.html" class="btn btn-orange btn-rounded" id="see-more">See More</a>
+            <a href="" class="btn btn-orange btn-rounded" id="see-more">See More</a>
         </div>
 
 
@@ -204,7 +232,29 @@
         </div>
         <!-- Modal -->
 
-        <!----------------------------------------------------- COMPLETE PROFILE MODAL ---------------------------------------------------------------->
+        <!----------------------------------------------------- EVENT TABLE DIV------------------------------------------------------------>
+
+        <div id="event-table-div">
+            <table table-layout="fixed" class="table table-striped table-hover" id="event-table">
+                <thead>
+                    <tr>
+                        <th class="table-col" scope="col">Event</th>
+                        <th class="table-col" scope="col">Name</th>
+                        <th class="table-col" scope="col">Location</th>
+                        <th class="table-col" scope="col">Date</th>
+                        <!-- <th class="table-col" scope="col">Time</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!----------------------------------------------------- COMPLETE PROFILE MODAL ---------------------------------------------------------------->
 
 
 
@@ -220,31 +270,30 @@
 
 
 
-        <!-- Firebase -->
-        <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-        <!-- Bootstrap core CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-            rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <!-- JavaScript -->
-        <script src="./assets/javascript/project1.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- JavaScript -->
+    <script src="./assets/javascript/project1.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 
 
 </body>

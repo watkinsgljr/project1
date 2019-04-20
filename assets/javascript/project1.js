@@ -36,24 +36,14 @@ $(document).ready(function () {
     columns: [{ title: "Event" },
     { title: "Name" },
     { title: "Location" },
-    { title: "Date" },
-    { title: "Time" }]
+    { title: "Date" }]
   });
 
   //-------------------------------------------------CREATE DATA TABLE BASED ON USER SEARCH-------------------------------
 
-  $("#see-more").on("click", function generateEventTable() {
-    for (i = 0; i < 100; i++);
-    event = result.url;
-    name = result.name;
-    location = result.venue;
-    date = result.localDate;
-    time = result.localTime;
-    newEvent = [event, name, location, date, time];
-    data.push(newEvent);
-    let table = $("#event-table").DataTable();
-    table.row.add(newEvent).draw();
-
+  $("#see-more").on("click", function showTable() {
+    event.preventDefault();
+    $("#event-table-div").show();
   });
 
 
@@ -121,17 +111,31 @@ $(document).ready(function () {
       });
   });
 
+  // $(document).ready(function () {
+  //   var date_input = $('#date-search'); //our date input has the name "date"
+  //   var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+  //   var options = {
+  //       format: 'mm/dd/yyyy',
+  //       container: container,
+  //       todayHighlight: true,
+  //       autoclose: true,
+  //   };
+  //   date_input.datepicker(options);
+  // }); 
+
 
   //----------------------------------------------------SEARCH BUTTON CLICK EVENT--------------------------------------------------------------
-
+  let searchResults = [];
+  let eventQueryResults = [];
 
   $(document).on("click", "#search-button", function () {
     event.preventDefault();
+    table.clear();
+    clearEventCards();
+
     var search = $("#city-search").val()
     apiEvents(search);
   });
-
-
 
 
 
@@ -142,38 +146,46 @@ $(document).ready(function () {
     let keyword = "keyword=" + $("#keyword-search").val() + "&";
     let city = "city=" + $("#city-search").val() + "&";
     let size = "size=6";
-    if ($("#city-search").val() !== "") {
-      let query = apiTM + "events.json?" + apiKey + keyword + city;
-      api(query);
-      console.log("keyword");
-      console.log(query);
+    let query = apiTM + "events.json?" + apiKey;
+    if ($("#city-search").val().length > 0) {
+      query += city;
+
+      if ($("#keyword-search").val().length > 0)
+        query += keyword;
+
     } else {
-      let query = apiTM + "events.json?" + apiKey + city;
-      api(query)
-      console.log("no keyword");
-      console.log(query);
+      alert("Please tell us your search conditions.");
     }
+    console.log(query);
+    api(query);
 
   }
+
   function api(query) {
     $.ajax({
       url: query,
       method: "GET"
     }).then(function (response) {
       console.log(response);
-      for (i = 0; i < 6; i++) {
+      console.log(response._embedded);
+      for (i = 0; i < response._embedded.events.length; i++) {
         console.log("eventSearch")
         console.log(response._embedded.events[i])
         let result = {
+          id: response._embedded.events[i].id,
           name: response._embedded.events[i].name,
           date: response._embedded.events[i].dates.start.localDate,
           time: response._embedded.events[i].dates.start.localTime,
           image: response._embedded.events[i].images[8].url,
           venue: response._embedded.events[i]._embedded.venues[0].name
-
         }
+        searchResults.push(result);
+        let image = "<img id=\"data-image\" src=\"" + result.image + "\">";
+        eventQueryResults = [image, result.name, result.venue, result.date, result.id];
+        data.push(eventQueryResults);
+        let table = $("#event-table").DataTable();
+        table.row.add(eventQueryResults).draw();
         createEventCards(result, i);
-        
       }
     });
   };
@@ -185,49 +197,108 @@ $(document).ready(function () {
 
   let queryResultsArray = [];
 
+  let eventCard;
+  let cardImage;
+  let cardBody;
+  let eventTitle;
+  let eventDate;
+  let eventButton;
+
 
   function createEventCards(result, index) {
-    $('#city-search').val("")
-    $('#keyword-search').val("")
-    $("#date-search").val("");
-    gridLocation = index + 1;
+    if (index < 6) {
+      $('#city-search').val("")
+      $('#keyword-search').val("")
+      $("#date-search").val("");
+      gridLocation = index + 1;
 
-    // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
-    let eventCard = $("<div>");
-    let cardImage = $("<img>");
-    let cardBody = $("<div>");
-    let eventTitle = $("<a>");
-    let eventTitleText;
-    let eventDate = $("<p>");
-    let eventButton = $("<a>");
-    let eventURL;
-    // EVENT CARD---------------------------------------------------
-    eventCard.addClass("card");
+      // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
+      eventCard = $("<div>");
+      cardImage = $("<img>");
+      cardBody = $("<div>");
+      eventTitle = $("<a>");
+      let eventTitleText;
+      eventDate = $("<p>");
+      eventButton = $("<a>");
+      let eventURL;
+      // EVENT CARD---------------------------------------------------
+      eventCard.addClass("card");
 
-    //EVENT IMAGE---------------------------------------------------
-    cardImage.addClass("card-img-top");
-    cardImage.attr("alt", "card image cap");
-    cardImage.attr("src", result.image);
-    cardImage.prependTo(eventCard);
-    //CARD BODY ELEMENTS--------------------------------------------
-    cardBody.addClass("card-body");
-    eventTitle.addClass("card-title");
-    eventTitle.text(result.name)
-    eventDate.addClass("card-text");
-    eventDate.text(result.date);
-    eventButton.addClass("btn btn-primary");
-    eventButton.text("See More");
-    cardBody.appendTo(eventCard);
-    eventTitle.prependTo(cardBody);
-    eventDate.appendTo(cardBody);
-    eventButton.appendTo(cardBody);
-    eventCard.prependTo($(".item-" + gridLocation))
+      //EVENT IMAGE---------------------------------------------------
+      cardImage.addClass("card-img-top");
+      cardImage.attr("alt", "card image cap");
+      cardImage.attr("src", result.image);
+      cardImage.prependTo(eventCard);
+      //CARD BODY ELEMENTS--------------------------------------------
+      cardBody.addClass("card-body");
+      eventTitle.addClass("card-title");
+      eventTitle.text(result.name)
+      eventDate.addClass("card-text");
+      eventDate.text(result.date);
+      eventButton.addClass("btn btn-primary event-card-btn");
+      eventButton.val(result.id)
+      eventButton.text("See Details");
+      cardBody.appendTo(eventCard);
+      eventTitle.prependTo(cardBody);
+      eventDate.appendTo(cardBody);
+      eventButton.appendTo(cardBody);
+      eventCard.prependTo($(".item-" + gridLocation))
+    };
   }
+
+  function clearEventCards() {
+    eventCard = "";
+    cardImage = "";
+    cardBody = "";
+    eventTitle = "";
+    eventDate = "";
+    eventButton = "";
+    console.log("events cleared")
+  };
+
+
+  //-------------------------------------------------EVENT CARD BUTTON---------------------------
+
+
+  $(document).on("click", ".event-card-btn", function () {
+    console.log($(this));   
+    $("#event-page-main-container").show();
+    $("#main-container").hide();
+    let buttonValue = $(this)[0].value
+    let eventDetails = $.grep(searchResults, function(events) {
+      return events.id == buttonValue;  
+    });
+    console.log(eventDetails);
+    console.log(eventButton.val());
+
+    $(".item-7").text(eventDetails[0].name);
+    $(".event-page-date").text("Join us on " + eventDetails[0].date);
+    $(".event-page-time").text("At " + eventDetails[0].time);
+
+  });
+
+  $(document).on("click", "#back-to-search-results-btn", function() {
+    event.preventDefault();
+    $("#event-page-main-container").toggle();
+    $("#main-container").toggle();
+
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 });
-
-
 
 
 
