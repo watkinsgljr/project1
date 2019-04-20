@@ -25,6 +25,9 @@ $(document).ready(function () {
     LOGGEDOFF: 1,
     LOGGEDIN: 2,
   };
+
+  var parkingData = null;
+
   //-------------------------------------------------DATA TABLE LOGIC------------------------------------------------
   let database = firebase.database();
   let queryObjectRef = database.ref("/queryObj")
@@ -41,9 +44,18 @@ $(document).ready(function () {
 
   //-------------------------------------------------CREATE DATA TABLE BASED ON USER SEARCH-------------------------------
 
-  $("#see-more").on("click", function showTable() {
-    event.preventDefault();
-    $("#event-table-div").show();
+  $("#see-more").on("click", function generateEventTable() {
+    for (i = 0; i < 1; i++);
+    event = result.url;
+    name = result.name;
+    location = result.venue;
+    date = result.localDate;
+    time = result.localTime;
+    newEvent = [event, name, location, date, time];
+    data.push(newEvent);
+    let table = $("#event-table").DataTable();
+    table.row.add(newEvent).draw();
+
   });
 
 
@@ -134,6 +146,8 @@ $(document).ready(function () {
     clearEventCards();
 
     var search = $("#city-search").val()
+    var keyword = $("#keyword-search").val()
+    var date = $("#date-search").val()
     apiEvents(search);
   });
 
@@ -185,66 +199,171 @@ $(document).ready(function () {
         data.push(eventQueryResults);
         let table = $("#event-table").DataTable();
         table.row.add(eventQueryResults).draw();
+        //   venue: response._embedded.events[i]._embedded.venues[0].name,
+        //   tickets: response._embedded.events[i].url
+
+        // }
+        console.log(result)
+        googleId(result.venue);
+        // this is the parking map function
+        googlePark(result.venue); 
         createEventCards(result, i);
       }
     });
   };
 
 
+  function googleId(id){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&inputtype=textquery&input=' + id + "&" + googleKey + "&fields=place_id"
+    const URL = PROXY_URL + TARGET_URL
+    // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
+    $.ajax({
+        url: URL,
+        method: "GET",
+    }).then(function (answer){
+        googlePlace(answer.candidates[0].place_id)
+    })
+};
+
+    // function to gain detailed data using place_id
+
+function googlePlace(venue){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    // edit the fields of the below target URL to change the data we are getting back
+    const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/details/json?&placeid=' + venue + "&" + googleKey + "&fields=url"
+    const URL = PROXY_URL + TARGET_URL
+    $.ajax({
+        url: URL,
+        method: "GET",
+    }).then(function (answer){
+        $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
+
+    })
+};
+
+function googlePark(venue){
+    const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
+    const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+    const TARGET_URL = 'https://www.google.com/maps/embed/v1/search?q=parking+near+'
+    const URL = PROXY_URL + TARGET_URL + venue + "&" + googleKey
+    // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
+    var map2;
+    $.ajax({
+        async: false,
+        url: URL,
+        method: "GET",
+        success: function (){
+            var map ="<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
+            map2 = map;
+        },
+    })
+    mappingData(map2)
 
 
-  //-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
+    
+    // .then (function (map){
+    //     // console.log(parking)
+    //     // console.log(TARGET_URL)
+    //     var map ="<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
+    //     return map;
+    // })
+    
+}
 
-  let queryResultsArray = [];
-
-  let eventCard;
-  let cardImage;
-  let cardBody;
-  let eventTitle;
-  let eventDate;
-  let eventButton;
+function mappingData(mapData){
+    parkingData = mapData
+}
+    
+//-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
 
 
-  function createEventCards(result, index) {
-    if (index < 6) {
-      $('#city-search').val("")
-      $('#keyword-search').val("")
-      $("#date-search").val("");
-      gridLocation = index + 1;
 
-      // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
-      eventCard = $("<div>");
-      cardImage = $("<img>");
-      cardBody = $("<div>");
-      eventTitle = $("<a>");
-      let eventTitleText;
-      eventDate = $("<p>");
-      eventButton = $("<a>");
-      let eventURL;
-      // EVENT CARD---------------------------------------------------
-      eventCard.addClass("card");
+function createEventCards(result, index) {
+    $('#city-search').val("")
+    $('#keyword-search').val("")
+    $("#date-search").val("");
+    gridLocation = index + 1;
+    let eventCard = "<div id='card-" + gridLocation + "' class='item-" + gridLocation + "' >"
+    let eventImg = "<img class='front card-img-top' id='eventImg' src='" + result.image + "' />"
+    let cardFront = "<p class='front card-body'>Test</p>"
+    let cardData = "<div class='back card-title'>" + result.name
+    let cardMap = "<div class= 'back'>" + parkingData   + "</div>"
+    let cardComplete = eventCard + eventImg + cardFront + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
+    console.log(cardComplete)
+    $(".item-" + gridLocation).append(cardComplete);
+    $("#card-" + gridLocation).flip();
 
-      //EVENT IMAGE---------------------------------------------------
-      cardImage.addClass("card-img-top");
-      cardImage.attr("alt", "card image cap");
-      cardImage.attr("src", result.image);
-      cardImage.prependTo(eventCard);
-      //CARD BODY ELEMENTS--------------------------------------------
-      cardBody.addClass("card-body");
-      eventTitle.addClass("card-title");
-      eventTitle.text(result.name)
-      eventDate.addClass("card-text");
-      eventDate.text(result.date);
-      eventButton.addClass("btn btn-primary event-card-btn");
-      eventButton.val(result.id)
-      eventButton.text("See Details");
-      cardBody.appendTo(eventCard);
-      eventTitle.prependTo(cardBody);
-      eventDate.appendTo(cardBody);
-      eventButton.appendTo(cardBody);
-      eventCard.prependTo($(".item-" + gridLocation))
-    };
-  }
+    // card flip libray @: https://nnattawat.github.io/flip/
+    
+
+    
+    // // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
+    // let eventCard = $("<div>");
+    // let cardImage = $("<img>");
+    // let cardBody = $("<div>");
+    // let eventTitle = $("<a>");
+    // let eventTitleText;
+    // let eventDate = $("<p>");
+    // let eventButton = $("<a>");
+    // let cardBack = parkingData;
+    // let eventURL;
+    // // EVENT CARD---------------------------------------------------
+    // eventCard.addClass("card");
+    // eventCard.attr("id", "card")
+
+    // //EVENT IMAGE---------------------------------------------------
+    // cardImage.addClass("card-img-top front");
+    // cardImage.attr("alt", "card image cap");
+    // cardImage.attr("src", result.image);
+    // cardImage.prependTo(eventCard);
+    // //CARD BODY ELEMENTS--------------------------------------------
+    // cardBody.addClass("card-body front");
+    // eventTitle.addClass("card-title front");
+    // eventTitle.text(result.name)
+    // eventDate.addClass("card-text front");
+    // eventDate.text(result.date);
+    // eventButton.addClass("btn btn-primary front");
+    // eventButton.text("See More");
+    // cardBody.appendTo(eventCard);
+    // eventTitle.prependTo(cardBody);
+    // eventDate.appendTo(cardBody);
+    // eventButton.appendTo(cardBody);
+    // eventCard.prependTo($(".item-" + gridLocation));
+
+    
+    
+}
+
+// $("#card").flip();
+$(document).on("click", "#card-1", function (){
+  $("#card-1").flip();
+  console.log("flip")
+})
+
+$(document).on("click", "#card-2", function (){
+  $("#card-2").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-3", function (){
+  $("#card-3").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-4", function (){
+  $("#card-4").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-5", function (){
+  $("#card-5").flip();
+  console.log("flip")
+})
+$(document).on("click", "#card-5", function (){
+  $("#card-6").flip();
+  console.log("flip")
+})
+
 
   function clearEventCards() {
     eventCard = "";
