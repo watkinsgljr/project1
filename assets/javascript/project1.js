@@ -31,7 +31,7 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
-today = mm + '/' + dd + '/' + yyyy;
+today = yyyy + '-' + mm + '-' + dd + "T00:00:00z&sort=date,asc&";
 
 console.log(today)
 
@@ -169,7 +169,7 @@ console.log(today)
     let keyword = "keyword=" + $("#keyword-search").val() + "&";
     let city = "city=" + $("#city-search").val() + "&";
     let size = "size=6";
-    let query = apiTM + "events.json?" + apiKey;
+    let query = apiTM + "events.json?" + today + apiKey;
     if ($("#city-search").val().length > 0) {
       query += city;
 
