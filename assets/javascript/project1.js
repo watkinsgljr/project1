@@ -31,7 +31,7 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
-today = yyyy + '-' + mm + '-' + dd + "T00:00:00z&sort=date,asc&";
+today = "localStartDateTime=" + yyyy + '-' + mm + '-' + dd + "T00:00:00,*&sort=date,asc&";
 
 console.log(today)
 
