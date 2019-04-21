@@ -30,8 +30,8 @@ var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
-
 today = "localStartDateTime=" + yyyy + '-' + mm + '-' + dd + "T00:00:00,*&sort=date,asc&";
+// today = yyyy + '-' + mm + '-' + dd;
 
 console.log(today)
 
@@ -159,9 +159,9 @@ console.log(today)
     var date = $("#date-search").val()
     apiEvents(search);
   });
-
-
-
+  
+  
+  
   function apiEvents(eventSearch) {
     console.log(eventSearch)
     const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
@@ -169,12 +169,18 @@ console.log(today)
     let keyword = "keyword=" + $("#keyword-search").val() + "&";
     let city = "city=" + $("#city-search").val() + "&";
     let size = "size=6";
-    let query = apiTM + "events.json?" + today + apiKey;
+    var date = $("#date-search").val()
+    var dateSearch = "localStartDateTime=" + moment(date).format("YYYY-MM-DDTHH:mm:ss") + ",*&sort=date,asc&"
+    let query = apiTM + "events.json?" + apiKey;
     if ($("#city-search").val().length > 0) {
       query += city;
 
       if ($("#keyword-search").val().length > 0)
         query += keyword;
+
+      if ($("#date-search").val() > 0)
+      query += dateSearch;
+      console.log(dateSearch)
 
     } else {
       // alert("Please tell us your search conditions.");
