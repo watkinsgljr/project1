@@ -168,7 +168,7 @@ $(document).ready(function () {
         query += keyword;
 
     } else {
-      alert("Please tell us your search conditions.");
+      // alert("Please tell us your search conditions.");
     }
     console.log(query);
     api(query);
@@ -182,7 +182,7 @@ $(document).ready(function () {
     }).then(function (response) {
       console.log(response);
       console.log(response._embedded);
-      for (i = 0; i < 1; i++) {
+      for (i = 0; i < 6; i++) {
         console.log("eventSearch")
         console.log(response._embedded.events[i])
         let result = {
@@ -192,8 +192,10 @@ $(document).ready(function () {
           time: response._embedded.events[i].dates.start.localTime,
           image: response._embedded.events[i].images[8].url,
           venue: response._embedded.events[i]._embedded.venues[0].name,
-          seatMap: response._embedded.events[i].seatmap.staticUrl
+          // seatMap: response._embedded.events[i].seatmap.staticUrl,
+          tickets: response._embedded.events[i].url
         }
+        // console.log(response._embedded.events[i].seatmap.staticUrl)
         searchResults.push(result);
         let image = "<img id=\"data-image\" src=\"" + result.image + "\">";
         eventQueryResults = [image, result.name, result.venue, result.date, result.id];
@@ -205,9 +207,9 @@ $(document).ready(function () {
 
         // }
         console.log(result)
-        googleId(result.venue);
+        // googleId(result.venue);
         // this is the parking map function
-        googlePark(result.venue); 
+        // googlePark(result.venue); 
         createEventCards(result, i);
       }
     });
@@ -287,17 +289,20 @@ function createEventCards(result, index) {
     $('#keyword-search').val("")
     $("#date-search").val("");
     gridLocation = index + 1;
-    let eventCard = "<div id='card-" + gridLocation + "' class='item-" + gridLocation + "' >"
-    let eventImg = "<img class='front card-img-top' id='eventImg' src='" + result.image + "' />"
+    let eventCard = "<div id='card-" + gridLocation + "' class='item item-" + gridLocation + "' >"
+    let eventImg = "<img class='front' id='eventImg' src='" + result.image + "' />"
     // let cardFront = "<p class='front card-body'>Test</p>"
-    // let cardData = "<div class='back card-title'>" + result.date + "</div>"
+    let cardData = "<div class='front text-center'>" + result.name + "</br>" + result.date + "</br>" + result.time + "</div>"
     let cardMap = "<div class='back'>" + parkingData + "</div>"
-    let seatMap = "<div><img  class='back' src=" + result.seatMap + "></img></div>"
-    let button = "<button type=button class='back event-card-btn'>More Info</button>"
+    let ticketUrl = "<a class='back' target='_blank' href='" + result.tickets + "'> Purchase tickets</a>"
+    let seatMap = "<div><img  class='back' width='450' height='300' src=" + result.seatMap + "></img></div>"
+    let button = "<button type=button class='back text-center btn-primary event-card-btn'>More Info</button>"
     // let cardComplete = eventCard + eventImg  + cardFront + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
-    let cardComplete = eventCard + eventImg + seatMap + "</br>" + result.name + "</br>" + result.date + button + "</div>" + cardMap + "</div>"
+    let cardComplete = cardData  + button + "</div>"  + "</div>"
     console.log(cardComplete)
-    $(".item-" + gridLocation).append(cardComplete);
+    $(".item-" + gridLocation).prepend(eventCard + eventImg + ticketUrl);
+
+    $("#data-" + gridLocation).append(cardComplete);
     $("#card-" + gridLocation).flip();
 
     // card flip libray @: https://nnattawat.github.io/flip/
