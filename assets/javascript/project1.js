@@ -31,7 +31,6 @@ var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 today = "localStartDateTime=" + yyyy + '-' + mm + '-' + dd + "T00:00:00,*&sort=date,asc&";
-// today = yyyy + '-' + mm + '-' + dd;
 
 console.log(today)
 
@@ -383,7 +382,7 @@ $(document).on("click", "#card-5", function (){
   $("#card-5").flip();
   console.log("flip")
 })
-$(document).on("click", "#card-5", function (){
+$(document).on("click", "#card-6", function (){
   $("#card-6").flip();
   console.log("flip")
 })
