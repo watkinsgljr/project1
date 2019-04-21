@@ -193,6 +193,10 @@ img {
   width: 450px;
 }
 
+button {
+  width: 50%;
+}
+
 .search-card-input-div {
   width: 30%;
   

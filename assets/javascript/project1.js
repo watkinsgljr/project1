@@ -182,7 +182,7 @@ $(document).ready(function () {
     }).then(function (response) {
       console.log(response);
       console.log(response._embedded);
-      for (i = 0; i < response._embedded.events.length; i++) {
+      for (i = 0; i < 1; i++) {
         console.log("eventSearch")
         console.log(response._embedded.events[i])
         let result = {
@@ -191,7 +191,8 @@ $(document).ready(function () {
           date: response._embedded.events[i].dates.start.localDate,
           time: response._embedded.events[i].dates.start.localTime,
           image: response._embedded.events[i].images[8].url,
-          venue: response._embedded.events[i]._embedded.venues[0].name
+          venue: response._embedded.events[i]._embedded.venues[0].name,
+          seatMap: response._embedded.events[i].seatmap.staticUrl
         }
         searchResults.push(result);
         let image = "<img id=\"data-image\" src=\"" + result.image + "\">";
@@ -288,10 +289,13 @@ function createEventCards(result, index) {
     gridLocation = index + 1;
     let eventCard = "<div id='card-" + gridLocation + "' class='item-" + gridLocation + "' >"
     let eventImg = "<img class='front card-img-top' id='eventImg' src='" + result.image + "' />"
-    let cardFront = "<p class='front card-body'>Test</p>"
-    let cardData = "<div class='back card-title'>" + result.name
-    let cardMap = "<div class= 'back'>" + parkingData   + "</div>"
-    let cardComplete = eventCard + eventImg + cardFront + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
+    // let cardFront = "<p class='front card-body'>Test</p>"
+    // let cardData = "<div class='back card-title'>" + result.date + "</div>"
+    let cardMap = "<div class='back'>" + parkingData + "</div>"
+    let seatMap = "<div><img  class='back' src=" + result.seatMap + "></img></div>"
+    let button = "<button type=button class='back event-card-btn'>More Info</button>"
+    // let cardComplete = eventCard + eventImg  + cardFront + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
+    let cardComplete = eventCard + eventImg + seatMap + "</br>" + result.name + "</br>" + result.date + button + "</div>" + cardMap + "</div>"
     console.log(cardComplete)
     $(".item-" + gridLocation).append(cardComplete);
     $("#card-" + gridLocation).flip();
