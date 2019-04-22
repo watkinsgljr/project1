@@ -8,23 +8,27 @@
     <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
     <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <title>EventHub</title>
 </head>
 
 <body>
 
     <div id="event-page-main-container">
+        <div id="header-photo-div2">
+            <img id="header-photo2" src="./assets/images/photo-1501281668745-f7f57925c3b4.jpg">
+        </div>
 
         <div class="text-center">
             <a href="" class="btn btn-orange btn-rounded" id="back-to-search-results-btn">Back To Results</a>
         </div>
 
-        <div id="grid-container2">
+        <div id="grid-container2" class="card">
             <div class="item2 item-7">
                 Event Name
             </div>
 
-            <div class="item2 item-8">
+            <div class="item2 item-8 event-page-image">
                 <!-- <img class="mic-pic"c src="assets/images/mic.jpg"> -->
             </div>
 
@@ -35,12 +39,30 @@
             </div>
 
             <div class="item2 item-10">
-                Comment Box Here
+                <div id="comment-div">
+                    <div class="form-group">
+                        XYTbr <br>
+                        fslhf <br>
+                        sdgsbr <br>
+                        gdfbr <br>
+                        <div id="comment-wrap">
+
+                            <label for="comment-text-area">What is looking like?</label>
+                            <textarea class="form-control" id="comment-text-area" rows="7"></textarea>
+                            <a type="submit" class="btn btn-orange btn-rounded" id="comment-btn">Send
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
 
             <div class="item2 item-11">
                 Map Goes Here
             </div>
+
+
 
         </div>
     </div>
@@ -294,6 +316,8 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
 
 
 </body>
