@@ -26,13 +26,13 @@ $(document).ready(function () {
     LOGGEDIN: 2,
   };
 
-var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
-today = "localStartDateTime=" + yyyy + '-' + mm + '-' + dd + "T00:00:00,*&sort=date,asc&";
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  today = "localStartDateTime=" + yyyy + '-' + mm + '-' + dd + "T00:00:00,*&sort=date,asc&";
 
-console.log(today)
+  console.log(today)
 
   var parkingData = null;
 
@@ -158,9 +158,9 @@ console.log(today)
     var date = $("#date-search").val()
     apiEvents(search);
   });
-  
-  
-  
+
+
+
   function apiEvents(eventSearch) {
     console.log(eventSearch)
     const apiKey = "apikey=rrFQUi7azSu6BIs8pNUwk9tDZHSTv8YY&"
@@ -178,7 +178,7 @@ console.log(today)
         query += keyword;
 
       if ($("#date-search").val() > 0)
-      query += dateSearch;
+        query += dateSearch;
       console.log(dateSearch)
 
     } else {
@@ -230,38 +230,38 @@ console.log(today)
   };
 
 
-  function googleId(id){
+  function googleId(id) {
     const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
     const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
     const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?&inputtype=textquery&input=' + id + "&" + googleKey + "&fields=place_id"
     const URL = PROXY_URL + TARGET_URL
     // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
     $.ajax({
-        url: URL,
-        method: "GET",
-    }).then(function (answer){
-        googlePlace(answer.candidates[0].place_id)
+      url: URL,
+      method: "GET",
+    }).then(function (answer) {
+      googlePlace(answer.candidates[0].place_id)
     })
-};
+  };
 
-    // function to gain detailed data using place_id
+  // function to gain detailed data using place_id
 
-function googlePlace(venue){
+  function googlePlace(venue) {
     const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
     const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
     // edit the fields of the below target URL to change the data we are getting back
     const TARGET_URL = 'https://maps.googleapis.com/maps/api/place/details/json?&placeid=' + venue + "&" + googleKey + "&fields=url"
     const URL = PROXY_URL + TARGET_URL
     $.ajax({
-        url: URL,
-        method: "GET",
-    }).then(function (answer){
-        $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
+      url: URL,
+      method: "GET",
+    }).then(function (answer) {
+      $("#map").html("<iframe width='450' height='250' frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/place?" + googleKey + "&q=place_id:" + venue + "'></iframe>")
 
     })
-};
+  };
 
-function googlePark(venue){
+  function googlePark(venue) {
     const googleKey = "key=AIzaSyAyJOOjrQqnT_rnAVL9Isx0SlP09SOvh5o";
     const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
     const TARGET_URL = 'https://www.google.com/maps/embed/v1/search?q=parking+near+'
@@ -269,36 +269,36 @@ function googlePark(venue){
     // cors solution = https://stackoverflow.com/questions/45185061/google-places-api-cors
     var map2;
     $.ajax({
-        async: false,
-        url: URL,
-        method: "GET",
-        success: function (){
-            var map ="<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
-            map2 = map;
-        },
+      async: false,
+      url: URL,
+      method: "GET",
+      success: function () {
+        var map = "<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
+        map2 = map;
+      },
     })
     mappingData(map2)
 
 
-    
+
     // .then (function (map){
     //     // console.log(parking)
     //     // console.log(TARGET_URL)
     //     var map ="<iframe width='450' height='250' frameborder='0' style='border:0' src='" + TARGET_URL + venue + "&" + googleKey + "'></iframe>"
     //     return map;
     // })
-    
-}
 
-function mappingData(mapData){
+  }
+
+  function mappingData(mapData) {
     parkingData = mapData
-}
-    
-//-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
+  }
+
+  //-------------------------------------------------CREATE EVENT CARDS BASED ON USER SEARCH-------------------------------
 
 
 
-function createEventCards(result, index) {
+  function createEventCards(result, index) {
     $('#city-search').val("")
     $('#keyword-search').val("")
     $("#date-search").val("");
@@ -310,9 +310,9 @@ function createEventCards(result, index) {
     let cardMap = "<div class='back'>" + parkingData + "</div>"
     let ticketUrl = "<a class='back' target='_blank' href='" + result.tickets + "'> Purchase tickets</a>"
     let seatMap = "<div><img  class='back' width='450' height='300' src=" + result.seatMap + "></img></div>"
-    let button = "<button type=button class='back text-center btn-primary event-card-btn'>More Info</button>"
+    let button = "<a class='btn btn-primary event-card-btn'>More Info</a>"
     // let cardComplete = eventCard + eventImg  + cardFront + cardMap + "</br>" + cardData + "</br>" + result.date + "</div>"
-    let cardComplete = cardData  + button + "</div>"  + "</div>"
+    let cardComplete = cardData + button + "</div>" + "</div>"
     console.log(cardComplete)
     $(".item-" + gridLocation).prepend(eventCard + eventImg + ticketUrl);
 
@@ -320,9 +320,9 @@ function createEventCards(result, index) {
     $("#card-" + gridLocation).flip();
 
     // card flip libray @: https://nnattawat.github.io/flip/
-    
 
-    
+
+
     // // ------ELEMENTS GENERATED AND ASSIGNED VARIABLE-----------
     // let eventCard = $("<div>");
     // let cardImage = $("<img>");
@@ -356,36 +356,36 @@ function createEventCards(result, index) {
     // eventButton.appendTo(cardBody);
     // eventCard.prependTo($(".item-" + gridLocation));
 
-    
-    
-}
 
-// $("#card").flip();
-$(document).on("click", "#card-1", function (){
-  $("#card-1").flip();
-  console.log("flip")
-})
 
-$(document).on("click", "#card-2", function (){
-  $("#card-2").flip();
-  console.log("flip")
-})
-$(document).on("click", "#card-3", function (){
-  $("#card-3").flip();
-  console.log("flip")
-})
-$(document).on("click", "#card-4", function (){
-  $("#card-4").flip();
-  console.log("flip")
-})
-$(document).on("click", "#card-5", function (){
-  $("#card-5").flip();
-  console.log("flip")
-})
-$(document).on("click", "#card-6", function (){
-  $("#card-6").flip();
-  console.log("flip")
-})
+  }
+
+  // $("#card").flip();
+  $(document).on("click", "#card-1", function () {
+    $("#card-1").flip();
+    console.log("flip")
+  })
+
+  $(document).on("click", "#card-2", function () {
+    $("#card-2").flip();
+    console.log("flip")
+  })
+  $(document).on("click", "#card-3", function () {
+    $("#card-3").flip();
+    console.log("flip")
+  })
+  $(document).on("click", "#card-4", function () {
+    $("#card-4").flip();
+    console.log("flip")
+  })
+  $(document).on("click", "#card-5", function () {
+    $("#card-5").flip();
+    console.log("flip")
+  })
+  $(document).on("click", "#card-6", function () {
+    $("#card-6").flip();
+    console.log("flip")
+  })
 
 
   function clearEventCards() {
@@ -403,12 +403,12 @@ $(document).on("click", "#card-6", function (){
 
 
   $(document).on("click", ".event-card-btn", function () {
-    console.log($(this));   
+    console.log($(this));
     $("#event-page-main-container").show();
     $("#main-container").hide();
-    let buttonValue = $(this)[0].value
-    let eventDetails = $.grep(searchResults, function(events) {
-      return events.id == buttonValue;  
+    let buttonValue = $(this)[0].value;
+    let eventDetails = $.grep(searchResults, function (events) {
+      return events.id == buttonValue;
     });
     console.log(eventDetails);
     console.log(eventButton.val());
@@ -419,7 +419,7 @@ $(document).on("click", "#card-6", function (){
 
   });
 
-  $(document).on("click", "#back-to-search-results-btn", function() {
+  $(document).on("click", "#back-to-search-results-btn", function () {
     event.preventDefault();
     $("#event-page-main-container").toggle();
     $("#main-container").toggle();
