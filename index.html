@@ -8,47 +8,77 @@
     <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
     <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <title>EventHub</title>
 </head>
 
 <body>
 
     <div id="event-page-main-container">
-
         <div class="text-center">
             <a href="" class="btn btn-orange btn-rounded" id="back-to-search-results-btn">Back To Results</a>
         </div>
+        <!-- <div id="header-photo-div2">
+            <img id="header-photo2" src="./assets/images/event6.jpg">
+        </div> -->
 
-        <div id="grid-container2">
-            <div class="item2 item-7">
+        <div id="grid-container2" class="card">
+            <div class="item2 card card-body-cascade item-7">
                 Event Name
             </div>
 
-            <div class="item2 item-8">
+            <div class="item2 item-8 event-page-image card-body-cascade">
                 <!-- <img class="mic-pic"c src="assets/images/mic.jpg"> -->
             </div>
 
-            <div class="item2 item-9">
-                <div class="event-page-date"></div>
+            <div class="item2 item-9 event-page-date">
+                <!-- <div class="event-page-date card"></div> -->
                 <br>
                 <div class="event-page-time"></div>
             </div>
 
             <div class="item2 item-10">
-                Comment Box Here
-            </div>
 
+
+
+            </div>
             <div class="item2 item-11">
                 Map Goes Here
             </div>
 
+
         </div>
+
+
+        <div class="form-group card comment-section-card">
+
+            <div id="comment-div">
+
+            </div>
+            <div id="comment-wrap">
+
+                <label for="comment-text-area">Leave a Comment!</label>
+                <textarea class="form-control" id="comment-text-area" rows="7"></textarea>
+                <a type="submit" class="btn btn-orange btn-rounded" id="comment-btn">Send
+                </a>
+            </div>
+        </div>
+
+
+
     </div>
+
+    </div>
+
+
+
+
 
     <div id="main-container">
         <header>
+            <div class="greeting"></div>
             <ul class="nav">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link active" href="#">Active</a>
                 </li>
                 <li class="nav-item">
@@ -56,12 +86,22 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                </li>
+                </li> -->
+                <form class="form-inline active-purple-3 active-purple-4">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input for="keyword-search" class="form-control form-control-sm ml-3 w-75" type="text"
+                        placeholder="Search Events" aria-label="Search">
+                </form>
+
+                <a href="" class="btn btn-orange btn-rounded" id="main-sign-up-button" data-toggle="modal"
+                    data-target="#darkModalForm">Sign
+                    Up
+                    Now!</a>
+
+                <img id="sign-in-button" data-toggle="modal" data-target="#darkModalForm2"
+                    src="https://img.icons8.com/color/48/000000/gender-neutral-user.png">
                 <div class="text-center">
-                    <a href="" class="btn btn-orange btn-rounded" id="sign-in-button" data-toggle="modal"
-                        data-target="#darkModalForm">Sign
-                        Up
-                        Now!</a>
+
                 </div>
             </ul>
 
@@ -77,9 +117,11 @@
             <!-- Card -->
 
             <div class="card card-cascade wider reverse">
+                <div id="search-card-border"></div>
 
                 <!-- Card content -->
                 <div class="card-body card-body-cascade text-center" id="search-card">
+
 
                     <div class="md-form mb-5 search-card-input-div">
                         <input type="text" id="city-search" class="search-card-input form-control validate black-text">
@@ -152,7 +194,8 @@
                         <!--Header-->
                         <div class="modal-header text-center pb-4">
                             <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel">
-                                <strong>SIGN</strong> <a class="orange-text font-weight-bold"><strong> UP</strong></a>
+                                <strong>SIGN</strong> <a class="orange-text font-weight-bold"><strong>
+                                        UP</strong></a>
                             </h3>
                             <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -232,6 +275,79 @@
         </div>
         <!-- Modal -->
 
+
+        <!----------------------------------------------------- LOG IN MODAL ---------------------------------------------------------------->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="darkModalForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog form-dark" role="document">
+                <!--Content-->
+                <div class="modal-content card card-image" style="background-image: url('./assets/images/login.jpg');">
+                    <div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                        <!--Header-->
+                        <div class="modal-header text-center pb-4">
+                            <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel">
+                                <strong>LOG</strong> <a class="orange-text font-weight-bold"><strong>
+                                        IN</strong></a>
+                            </h3>
+                            <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!--Body-->
+                        <div class="modal-body">
+                            <!--Body-->
+                            <div class="md-form mb-5">
+                                <input type="email" id="Form-email52" class="form-control validate white-text">
+                                <label data-error="Please double check your input" data-success="right"
+                                    for="Form-email52">Your Email</label>
+                            </div>
+
+                            <div class="md-form pb-3">
+                                <input type="password" id="Form-pass52" class="form-control validate white-text">
+                                <label data-error="Please double check your input" data-success="right"
+                                    for="Form-pass52">Your Password</label>
+                            </div>
+
+                            <!--Grid row-->
+                            <div class="row d-flex align-items-center mb-4">
+
+                                <!--Grid column-->
+                                <div class="text-center mb-3 col-md-12">
+                                    <button type="button" id="log-in-button"
+                                        class="btn btn-orange btn-block btn-rounded z-depth-1">Sign
+                                        up</button>
+                                </div>
+                                <!--Grid column-->
+
+                            </div>
+                            <!--Grid row-->
+
+                            <!--Grid row-->
+                            <div class="row">
+
+                                <!--Grid column-->
+                                <div class="col-md-12">
+                                    <p class="font-small white-text d-flex justify-content-end">Have an account? <a
+                                            href="#" class="orange-text ml-1 font-weight-bold">
+                                            Log in</a></p>
+                                </div>
+                                <!--Grid column-->
+
+                            </div>
+                            <!--Grid row-->
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Modal -->
+
+
         <!----------------------------------------------------- EVENT TABLE DIV------------------------------------------------------------>
 
         <div id="event-table-div">
@@ -294,6 +410,8 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
 
 
 </body>
