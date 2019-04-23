@@ -8,47 +8,68 @@
     <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
     <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <title>EventHub</title>
 </head>
 
 <body>
 
     <div id="event-page-main-container">
-
         <div class="text-center">
             <a href="" class="btn btn-orange btn-rounded" id="back-to-search-results-btn">Back To Results</a>
         </div>
+        <!-- <div id="header-photo-div2">
+            <img id="header-photo2" src="./assets/images/event6.jpg">
+        </div> -->
 
-        <div id="grid-container2">
-            <div class="item2 item-7">
+        <div id="grid-container2" class="card">
+            <div class="item2 card card-body-cascade item-7">
                 Event Name
             </div>
 
-            <div class="item2 item-8">
+            <div class="item2 item-8 event-page-image card-body-cascade">
                 <!-- <img class="mic-pic"c src="assets/images/mic.jpg"> -->
             </div>
 
-            <div class="item2 item-9">
-                <div class="event-page-date"></div>
+            <div class="item2 item-9 card event-page-date card">
+                <!-- <div class="event-page-date card"></div> -->
                 <br>
-                <div class="event-page-time"></div>
+                <div class="event-page-time card"></div>
             </div>
 
-            <div class="item2 item-10">
-                Comment Box Here
-            </div>
+            <div class="item2 item-10 card card-body-cascade">
 
+                <div class="form-group">
+
+                    <div id="comment-div card">
+
+                    </div>
+                    <div id="comment-wrap">
+
+                        <label for="comment-text-area">Leave a Comment!</label>
+                        <textarea class="form-control" id="comment-text-area" rows="7"></textarea>
+                        <a type="submit" class="btn btn-orange btn-rounded" id="comment-btn">Send
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
             <div class="item2 item-11">
                 Map Goes Here
             </div>
-
         </div>
+
     </div>
+
+
+
+
 
     <div id="main-container">
         <header>
             <ul class="nav">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link active" href="#">Active</a>
                 </li>
                 <li class="nav-item">
@@ -56,12 +77,19 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
-                </li>
+                </li> -->
+                <form class="form-inline active-purple-3 active-purple-4">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input for="keyword-search" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Events" aria-label="Search">
+                      </form>
+
+                      <img id="sign-in-button" data-toggle="modal"
+                      data-target="#darkModalForm" src="https://img.icons8.com/color/48/000000/gender-neutral-user.png">
                 <div class="text-center">
-                    <a href="" class="btn btn-orange btn-rounded" id="sign-in-button" data-toggle="modal"
+                    <!-- <a href="" class="btn btn-orange btn-rounded" id="sign-in-button" data-toggle="modal"
                         data-target="#darkModalForm">Sign
                         Up
-                        Now!</a>
+                        Now!</a> -->
                 </div>
             </ul>
 
@@ -77,9 +105,11 @@
             <!-- Card -->
 
             <div class="card card-cascade wider reverse">
+                <div id="search-card-border"></div>
 
                 <!-- Card content -->
                 <div class="card-body card-body-cascade text-center" id="search-card">
+
 
                     <div class="md-form mb-5 search-card-input-div">
                         <input type="text" id="city-search" class="search-card-input form-control validate black-text">
@@ -152,7 +182,8 @@
                         <!--Header-->
                         <div class="modal-header text-center pb-4">
                             <h3 class="modal-title w-100 white-text font-weight-bold" id="myModalLabel">
-                                <strong>SIGN</strong> <a class="orange-text font-weight-bold"><strong> UP</strong></a>
+                                <strong>SIGN</strong> <a class="orange-text font-weight-bold"><strong>
+                                        UP</strong></a>
                             </h3>
                             <button type="button" class="close white-text" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -294,6 +325,8 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
+
 
 
 </body>
