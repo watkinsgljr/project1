@@ -329,7 +329,8 @@ $(document).ready(function () {
       eventDate.addClass("card-text");
       eventDate.text(result.date);
       eventButton.addClass("btn btn-primary event-card-btn");
-      eventButton.val(result.id)
+      eventButton.val(result.id);
+      console.log(eventButton.val());
       eventButton.text("See Details");
       cardBody.appendTo(eventCard);
       eventTitle.prependTo(cardBody);
@@ -392,6 +393,7 @@ $(document).ready(function () {
   let commentSearch;
 
   function loadComments(eKey) {
+    console.log(eKey);
 
     $("#comment-div").html(" ");
     database.ref("/commentsRef").orderByChild("eventId").equalTo(eKey).on("value", function(snapshot) {
