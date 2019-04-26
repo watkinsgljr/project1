@@ -393,8 +393,8 @@ $(document).ready(function () {
 
   function loadComments(eKey) {
 
-    
-    database.ref("/commentsRef").orderByChild("eventId").equalTo(eventKey).on("value", function(snapshot) {
+    $("#comment-div").html(" ");
+    database.ref("/commentsRef").orderByChild("eventId").equalTo(eKey).on("value", function(snapshot) {
       console.log(snapshot.val());
      
       commentArray = Object.values(snapshot.val());
