@@ -329,6 +329,7 @@ $(document).ready(function () {
       eventDate.addClass("card-text");
       eventDate.text(result.date);
       eventButton.addClass("btn btn-primary event-card-btn");
+      eventButton.attr("id", "event-button" + index);
       eventButton.val(result.id);
       console.log(eventButton.val());
       eventButton.text("See Details");
@@ -372,7 +373,7 @@ $(document).ready(function () {
     $(".event-page-date").text("Date: " + eventDetails[0].date);
     // $(".event-page-time").text("At " + eventDetails[0].time);
     $("#comment-btn").val(eventButton.val());
-    eventKey = $("#comment-btn").val();
+    eventKey = eventDetails[0].id;
     console.log($("#comment-btn").val());
     $(".event-page-image").css({ "background-image": "url(" + eventDetails[0].image + ")", "background-size": "75% 75%", "margin": "auto", "background-position": "center" });
     loadComments(eventKey);
@@ -418,7 +419,7 @@ $(document).ready(function () {
 
   //-------------------------------------------------COMMENTS SECTION LOGIC------------------------------------
 
-  $("#comment-btn").on("click", function (event) {
+  $(document).on("click", "#comment-btn", function (event) {
     event.preventDefault();
     let commentField = $('#comment-text-area').val();
     $("#comment-text-area").text(" ");
@@ -431,10 +432,10 @@ $(document).ready(function () {
         message: commentField    
     });
 
-    database.ref("/commentsRef").once("value").then(function (snapshot) {
-      console.log(snapshot);
-      console.log(snapshot.val());
-    })
+    // database.ref("/commentsRef").once("value").then(function (snapshot) {
+    //   console.log(snapshot);
+    //   console.log(snapshot.val());
+    // })
 
 
     // database.ref("/eventsRef").push({
